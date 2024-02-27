@@ -121,45 +121,17 @@
             }
         },
         "/products": {
-            "get": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "Get all products",
-                "description": "Returns a list of all products.",
-                "parameters": [
-                    {
-                        "name": "product_id",
-                        "in": "path",
-                        "description": "Path for fetching details of a single product.",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "string",
-                            "minimum": 1
-                        }
-                    }
-                ],
-                "security": [
-                    {
-                        "JWT": []
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of products returned successfully"
-                    },
-                    "500": {
-                        "description": "Internal server error"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Product"
                 ],
                 "summary": "Create a new product",
                 "description": "Allows admin users to create a new product.",
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -198,6 +170,41 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/products/{product_id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get a single product",
+                "description": "Returns a single product with a product_id.",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "description": "Path for fetching details of a single product.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "string",
+                            "minimum": 1
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "JWT": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of products returned successfully"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -446,7 +453,7 @@
             }
         },
         "/orders/place-order": {
-            "get": {
+            "post": {
                 "tags": [
                     "Order"
                 ],

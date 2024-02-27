@@ -24,16 +24,15 @@ export default class CartController {
         [user_id, product_id]
       );
 
-      // if (
-      //   parseInt(quantity) + existingCartItem[0].quantity >
-      //   product[0].availability
-      // ) {
-      //   return res.status(400).json({
-      //     msg: "Quantity exceeds available stock for this product.",
-      //   });
-      // }
-
       if (existingCartItem.length > 0) {
+        if (
+          product[0].availability <
+          existingCartItem[0].quantity + parseInt(quantity)
+        ) {
+          return res.status(400).json({
+            msg: "Quantity exceeds available stock for this product.",
+          });
+        }
         // Update the quantity of the existing cart item
         const updatedQuantity =
           existingCartItem[0].quantity + parseInt(quantity);

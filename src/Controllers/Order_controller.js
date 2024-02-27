@@ -137,6 +137,7 @@ export default class OrderController {
         "SELECT * FROM `Order` WHERE id = ? AND user_id = ?",
         [orderId, userId]
       );
+      console.log(order);
       if (!order) {
         return res.status(404).json({ msg: "Order not found for the user." });
       }
